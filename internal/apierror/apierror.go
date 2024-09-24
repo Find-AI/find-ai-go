@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/stainless-sdks/find-ai-go/internal/apijson"
+	"github.com/Find-AI/find-ai-go/internal/apijson"
 )
 
 // Error represents an error that originates from the API, i.e. when a request is

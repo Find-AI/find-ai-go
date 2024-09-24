@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/find-ai-go"
-	"github.com/stainless-sdks/find-ai-go/internal"
-	"github.com/stainless-sdks/find-ai-go/option"
+	"github.com/Find-AI/find-ai-go"
+	"github.com/Find-AI/find-ai-go/internal"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 type closureTransport struct {

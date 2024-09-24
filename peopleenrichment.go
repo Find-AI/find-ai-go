@@ -3,7 +3,7 @@
 package findai
 
 import (
-	"github.com/stainless-sdks/find-ai-go/option"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 // PeopleEnrichmentService contains methods and other services that help with

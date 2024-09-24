@@ -1,4 +1,4 @@
-module github.com/stainless-sdks/find-ai-go
+module github.com/Find-AI/find-ai-go
 
 go 1.21
 
