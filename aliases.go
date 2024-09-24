@@ -3,7 +3,7 @@
 package findai
 
 import (
-	"github.com/stainless-sdks/find-ai-go/internal/apierror"
+	"github.com/Find-AI/find-ai-go/internal/apierror"
 )
 
 type Error = apierror.Error

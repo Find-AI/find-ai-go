@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/find-ai-go/internal/param"
+	"github.com/Find-AI/find-ai-go/internal/param"
 )
 
 type Struct struct {

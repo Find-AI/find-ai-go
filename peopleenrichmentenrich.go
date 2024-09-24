@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/stainless-sdks/find-ai-go/internal/apijson"
-	"github.com/stainless-sdks/find-ai-go/internal/param"
-	"github.com/stainless-sdks/find-ai-go/internal/requestconfig"
-	"github.com/stainless-sdks/find-ai-go/option"
+	"github.com/Find-AI/find-ai-go/internal/apijson"
+	"github.com/Find-AI/find-ai-go/internal/param"
+	"github.com/Find-AI/find-ai-go/internal/requestconfig"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 // PeopleEnrichmentEnrichService contains methods and other services that help with

@@ -11,8 +11,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/stainless-sdks/find-ai-go"
-	"github.com/stainless-sdks/find-ai-go/option"
+	"github.com/Find-AI/find-ai-go"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 func TestPeopleEnrichmentEnrichNewWithOptionalParams(t *testing.T) {

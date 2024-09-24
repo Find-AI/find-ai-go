@@ -12,7 +12,7 @@ import (
 
 	"github.com/tidwall/sjson"
 
-	"github.com/stainless-sdks/find-ai-go/internal/param"
+	"github.com/Find-AI/find-ai-go/internal/param"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc
