@@ -17,10 +17,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stainless-sdks/find-ai-go/internal"
-	"github.com/stainless-sdks/find-ai-go/internal/apierror"
-	"github.com/stainless-sdks/find-ai-go/internal/apiform"
-	"github.com/stainless-sdks/find-ai-go/internal/apiquery"
+	"github.com/Find-AI/find-ai-go/internal"
+	"github.com/Find-AI/find-ai-go/internal/apierror"
+	"github.com/Find-AI/find-ai-go/internal/apiform"
+	"github.com/Find-AI/find-ai-go/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {
