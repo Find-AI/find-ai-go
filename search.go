@@ -34,25 +34,140 @@ func NewSearchService(opts ...option.RequestOption) (r *SearchService) {
 }
 
 // Starts a search.
-func (r *SearchService) New(ctx context.Context, body SearchNewParams, opts ...option.RequestOption) (res *http.Response, err error) {
+func (r *SearchService) New(ctx context.Context, body SearchNewParams, opts ...option.RequestOption) (res *SearchNewResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
 	path := "v1/searches"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
 }
 
 // The endpoint to poll to check the latest results of a search.
-func (r *SearchService) Get(ctx context.Context, id string, opts ...option.RequestOption) (err error) {
+func (r *SearchService) Get(ctx context.Context, id string, opts ...option.RequestOption) (res *[]SearchGetResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "")}, opts...)
 	if id == "" {
 		err = errors.New("missing required id parameter")
 		return
 	}
 	path := fmt.Sprintf("v1/searches/%s", id)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, nil, opts...)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
+}
+
+type SearchNewResponse struct {
+	Poll SearchNewResponsePoll `json:"poll,required"`
+	JSON searchNewResponseJSON `json:"-"`
+}
+
+// searchNewResponseJSON contains the JSON metadata for the struct
+// [SearchNewResponse]
+type searchNewResponseJSON struct {
+	Poll        apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *SearchNewResponse) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r searchNewResponseJSON) RawJSON() string {
+	return r.raw
+}
+
+type SearchNewResponsePoll struct {
+	Token string                    `json:"token,required"`
+	Path  string                    `json:"path,required"`
+	JSON  searchNewResponsePollJSON `json:"-"`
+}
+
+// searchNewResponsePollJSON contains the JSON metadata for the struct
+// [SearchNewResponsePoll]
+type searchNewResponsePollJSON struct {
+	Token       apijson.Field
+	Path        apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *SearchNewResponsePoll) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r searchNewResponsePollJSON) RawJSON() string {
+	return r.raw
+}
+
+type SearchGetResponse struct {
+	LinkedinURL      string                   `json:"linkedin_url,required"`
+	Name             string                   `json:"name,required"`
+	PhotoURL         string                   `json:"photo_url,required"`
+	Reason           string                   `json:"reason,required"`
+	ShortDescription string                   `json:"short_description,required"`
+	Slug             string                   `json:"slug,required"`
+	Company          SearchGetResponseCompany `json:"company"`
+	// Returned only for a company.
+	CompanySize string `json:"company_size"`
+	// Returned only for a person.
+	InferredEmail string `json:"inferred_email"`
+	// Returned only for a company.
+	Locations []string `json:"locations"`
+	// Returned only for a person.
+	Title string                `json:"title"`
+	JSON  searchGetResponseJSON `json:"-"`
+}
+
+// searchGetResponseJSON contains the JSON metadata for the struct
+// [SearchGetResponse]
+type searchGetResponseJSON struct {
+	LinkedinURL      apijson.Field
+	Name             apijson.Field
+	PhotoURL         apijson.Field
+	Reason           apijson.Field
+	ShortDescription apijson.Field
+	Slug             apijson.Field
+	Company          apijson.Field
+	CompanySize      apijson.Field
+	InferredEmail    apijson.Field
+	Locations        apijson.Field
+	Title            apijson.Field
+	raw              string
+	ExtraFields      map[string]apijson.Field
+}
+
+func (r *SearchGetResponse) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r searchGetResponseJSON) RawJSON() string {
+	return r.raw
+}
+
+type SearchGetResponseCompany struct {
+	// Returned only for a person.
+	Name string `json:"name,required"`
+	// Returned only for a person.
+	Slug string `json:"slug,required"`
+	// Returned only for a person.
+	Website string                       `json:"website,required"`
+	JSON    searchGetResponseCompanyJSON `json:"-"`
+}
+
+// searchGetResponseCompanyJSON contains the JSON metadata for the struct
+// [SearchGetResponseCompany]
+type searchGetResponseCompanyJSON struct {
+	Name        apijson.Field
+	Slug        apijson.Field
+	Website     apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *SearchGetResponseCompany) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r searchGetResponseCompanyJSON) RawJSON() string {
+	return r.raw
 }
 
 type SearchNewParams struct {
