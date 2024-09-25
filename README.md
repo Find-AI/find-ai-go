@@ -48,7 +48,7 @@ import (
 
 func main() {
 	client := findai.NewClient()
-	client.Searches.Get(context.TODO(), "id")
+	searchGetResponses, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {
 		panic(err.Error())
 	}

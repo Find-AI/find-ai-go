@@ -34,9 +34,8 @@ func NewCompanyEnrichmentEnrichService(opts ...option.RequestOption) (r *Company
 }
 
 // Returns structured data about a company based on a domain input.
-func (r *CompanyEnrichmentEnrichService) New(ctx context.Context, body CompanyEnrichmentEnrichNewParams, opts ...option.RequestOption) (res *http.Response, err error) {
+func (r *CompanyEnrichmentEnrichService) New(ctx context.Context, body CompanyEnrichmentEnrichNewParams, opts ...option.RequestOption) (res *CompanyEnrichmentEnrichNewResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
 	path := "v1/companies/enrich"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
@@ -44,9 +43,8 @@ func (r *CompanyEnrichmentEnrichService) New(ctx context.Context, body CompanyEn
 
 // The endpoint to poll to check the latest results when data about a company isn't
 // immediately available.
-func (r *CompanyEnrichmentEnrichService) Get(ctx context.Context, token string, opts ...option.RequestOption) (res *http.Response, err error) {
+func (r *CompanyEnrichmentEnrichService) Get(ctx context.Context, token string, opts ...option.RequestOption) (res *CompanyEnrichmentEnrichGetResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
 	if token == "" {
 		err = errors.New("missing required token parameter")
 		return
@@ -54,6 +52,76 @@ func (r *CompanyEnrichmentEnrichService) Get(ctx context.Context, token string, 
 	path := fmt.Sprintf("v1/companies/enrich/%s", token)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
+}
+
+type CompanyEnrichmentEnrichNewResponse struct {
+	// A list of facts we have on record about the company.
+	Facts []string `json:"facts,required"`
+	Name  string   `json:"name,required"`
+	// A summary of information about the company.
+	ShortDescription string `json:"short_description,required"`
+	Website          string `json:"website,required"`
+	// The URL to the company's LinkedIn profile if one exists.
+	LinkedinURL string `json:"linkedin_url"`
+	// A URL to an image of the company's logo. Valid for 10 minutes.
+	PhotoURL string                                 `json:"photo_url"`
+	JSON     companyEnrichmentEnrichNewResponseJSON `json:"-"`
+}
+
+// companyEnrichmentEnrichNewResponseJSON contains the JSON metadata for the struct
+// [CompanyEnrichmentEnrichNewResponse]
+type companyEnrichmentEnrichNewResponseJSON struct {
+	Facts            apijson.Field
+	Name             apijson.Field
+	ShortDescription apijson.Field
+	Website          apijson.Field
+	LinkedinURL      apijson.Field
+	PhotoURL         apijson.Field
+	raw              string
+	ExtraFields      map[string]apijson.Field
+}
+
+func (r *CompanyEnrichmentEnrichNewResponse) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r companyEnrichmentEnrichNewResponseJSON) RawJSON() string {
+	return r.raw
+}
+
+type CompanyEnrichmentEnrichGetResponse struct {
+	// A list of facts we have on record about the company.
+	Facts []string `json:"facts,required"`
+	Name  string   `json:"name,required"`
+	// A summary of information about the company.
+	ShortDescription string `json:"short_description,required"`
+	Website          string `json:"website,required"`
+	// The URL to the company's LinkedIn profile if one exists.
+	LinkedinURL string `json:"linkedin_url"`
+	// A URL to an image of the company's logo. Valid for 10 minutes.
+	PhotoURL string                                 `json:"photo_url"`
+	JSON     companyEnrichmentEnrichGetResponseJSON `json:"-"`
+}
+
+// companyEnrichmentEnrichGetResponseJSON contains the JSON metadata for the struct
+// [CompanyEnrichmentEnrichGetResponse]
+type companyEnrichmentEnrichGetResponseJSON struct {
+	Facts            apijson.Field
+	Name             apijson.Field
+	ShortDescription apijson.Field
+	Website          apijson.Field
+	LinkedinURL      apijson.Field
+	PhotoURL         apijson.Field
+	raw              string
+	ExtraFields      map[string]apijson.Field
+}
+
+func (r *CompanyEnrichmentEnrichGetResponse) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r companyEnrichmentEnrichGetResponseJSON) RawJSON() string {
+	return r.raw
 }
 
 type CompanyEnrichmentEnrichNewParams struct {
