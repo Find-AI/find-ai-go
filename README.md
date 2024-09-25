@@ -3,7 +3,7 @@
 <a href="https://pkg.go.dev/github.com/Find-AI/find-ai-go"><img src="https://pkg.go.dev/badge/github.com/Find-AI/find-ai-go.svg" alt="Go Reference"></a>
 
 The Find AI Go library provides convenient access to [the Find AI REST
-API](https://docs.find-ai.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
+API](https://usefind.ai/api/docs/) from applications written in Go. The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/Find-AI/find-ai-go@v0.0.1-alpha.0'
+go get -u 'github.com/Find-AI/find-ai-go@v0.1.0-alpha.1'
 ```
 
 <!-- x-release-please-end -->
