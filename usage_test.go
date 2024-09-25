@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/find-ai-go"
-	"github.com/stainless-sdks/find-ai-go/internal/testutil"
-	"github.com/stainless-sdks/find-ai-go/option"
+	"github.com/Find-AI/find-ai-go"
+	"github.com/Find-AI/find-ai-go/internal/testutil"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 func TestUsage(t *testing.T) {

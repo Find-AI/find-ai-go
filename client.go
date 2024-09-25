@@ -6,8 +6,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/stainless-sdks/find-ai-go/internal/requestconfig"
-	"github.com/stainless-sdks/find-ai-go/option"
+	"github.com/Find-AI/find-ai-go/internal/requestconfig"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 // Client creates a struct with services and top level methods that help with
