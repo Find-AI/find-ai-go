@@ -22,6 +22,7 @@ func TestUsage(t *testing.T) {
 	}
 	client := findai.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {

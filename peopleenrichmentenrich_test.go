@@ -23,6 +23,7 @@ func TestPeopleEnrichmentEnrichNewWithOptionalParams(t *testing.T) {
 	}
 	client := findai.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.PeopleEnrichment.Enrich.New(context.TODO(), findai.PeopleEnrichmentEnrichNewParams{
 		Email: findai.F("email"),
@@ -46,6 +47,7 @@ func TestPeopleEnrichmentEnrichGet(t *testing.T) {
 	}
 	client := findai.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.PeopleEnrichment.Enrich.Get(context.TODO(), "token")
 	if err != nil {

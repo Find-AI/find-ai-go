@@ -23,6 +23,7 @@ func TestSearchNewWithOptionalParams(t *testing.T) {
 	}
 	client := findai.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Searches.New(context.TODO(), findai.SearchNewParams{
 		MaxMatches: findai.F(0.000000),
@@ -49,6 +50,7 @@ func TestSearchGet(t *testing.T) {
 	}
 	client := findai.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {

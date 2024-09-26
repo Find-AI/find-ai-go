@@ -5,6 +5,7 @@ package findai
 import (
 	"context"
 	"net/http"
+	"os"
 
 	"github.com/Find-AI/find-ai-go/internal/requestconfig"
 	"github.com/Find-AI/find-ai-go/option"
@@ -21,11 +22,14 @@ type Client struct {
 }
 
 // NewClient generates a new client with the default option read from the
-// environment (). The option passed in as arguments are applied after these
-// default arguments, and all option will be passed down to the services and
-// requests that this client makes.
+// environment (FIND_AI_API_KEY). The option passed in as arguments are applied
+// after these default arguments, and all option will be passed down to the
+// services and requests that this client makes.
 func NewClient(opts ...option.RequestOption) (r *Client) {
 	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
+	if o, ok := os.LookupEnv("FIND_AI_API_KEY"); ok {
+		defaults = append(defaults, option.WithAPIKey(o))
+	}
 	opts = append(defaults, opts...)
 
 	r = &Client{Options: opts}
