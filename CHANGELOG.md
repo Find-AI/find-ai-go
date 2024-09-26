@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-09-26)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/Find-AI/find-ai-go/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** manual updates updated ([#6](https://github.com/Find-AI/find-ai-go/issues/6)) ([fa7e2ad](https://github.com/Find-AI/find-ai-go/commit/fa7e2ad99741119fa3e867084220299659312bab))
+
 ## 0.1.0-alpha.1 (2024-09-25)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/Find-AI/find-ai-go/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
