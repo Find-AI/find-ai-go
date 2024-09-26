@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/Find-AI/find-ai-go@v0.1.0-alpha.1'
+go get -u 'github.com/Find-AI/find-ai-go@v0.1.0-alpha.2'
 ```
 
 <!-- x-release-please-end -->
@@ -44,10 +44,13 @@ import (
 	"context"
 
 	"github.com/Find-AI/find-ai-go"
+	"github.com/Find-AI/find-ai-go/option"
 )
 
 func main() {
-	client := findai.NewClient()
+	client := findai.NewClient(
+		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("FIND_AI_API_KEY")
+	)
 	searchGetResponses, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {
 		panic(err.Error())
