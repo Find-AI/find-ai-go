@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/Find-AI/find-ai-go@v0.1.0-alpha.2'
+go get -u 'github.com/Find-AI/find-ai-go@v0.1.0-alpha.3'
 ```
 
 <!-- x-release-please-end -->
@@ -336,3 +336,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
 We are keen for your feedback; please open an [issue](https://www.github.com/Find-AI/find-ai-go/issues) with questions, bugs, or suggestions.
+
+## Contributing
+
+See [the contributing documentation](./CONTRIBUTING.md).
