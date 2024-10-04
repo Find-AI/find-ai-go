@@ -28,8 +28,8 @@ func TestSearchNewWithOptionalParams(t *testing.T) {
 	_, err := client.Searches.New(context.TODO(), findai.SearchNewParams{
 		MaxMatches: findai.F(0.000000),
 		Query:      findai.F("query"),
-		ResultMode: findai.F("result_mode"),
-		Scope:      findai.F("scope"),
+		ResultMode: findai.F(findai.SearchNewParamsResultModeExact),
+		Scope:      findai.F(findai.SearchNewParamsScopePerson),
 	})
 	if err != nil {
 		var apierr *findai.Error

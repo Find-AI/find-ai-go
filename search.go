@@ -98,19 +98,13 @@ func (r searchNewResponsePollJSON) RawJSON() string {
 }
 
 type SearchGetResponse struct {
-	LinkedinURL      string                   `json:"linkedin_url,required"`
-	Name             string                   `json:"name,required"`
-	PhotoURL         string                   `json:"photo_url,required"`
-	Reason           string                   `json:"reason,required"`
-	ShortDescription string                   `json:"short_description,required"`
-	Slug             string                   `json:"slug,required"`
-	Company          SearchGetResponseCompany `json:"company"`
-	// Returned only for a company.
-	CompanySize string `json:"company_size"`
+	LinkedinURL string `json:"linkedin_url,required"`
+	Name        string `json:"name,required"`
 	// Returned only for a person.
-	InferredEmail string `json:"inferred_email"`
+	Company            string                               `json:"company"`
+	CriteriaAndReasons []SearchGetResponseCriteriaAndReason `json:"criteria_and_reasons"`
 	// Returned only for a company.
-	Locations []string `json:"locations"`
+	Domain string `json:"domain"`
 	// Returned only for a person.
 	Title string                `json:"title"`
 	JSON  searchGetResponseJSON `json:"-"`
@@ -119,19 +113,14 @@ type SearchGetResponse struct {
 // searchGetResponseJSON contains the JSON metadata for the struct
 // [SearchGetResponse]
 type searchGetResponseJSON struct {
-	LinkedinURL      apijson.Field
-	Name             apijson.Field
-	PhotoURL         apijson.Field
-	Reason           apijson.Field
-	ShortDescription apijson.Field
-	Slug             apijson.Field
-	Company          apijson.Field
-	CompanySize      apijson.Field
-	InferredEmail    apijson.Field
-	Locations        apijson.Field
-	Title            apijson.Field
-	raw              string
-	ExtraFields      map[string]apijson.Field
+	LinkedinURL        apijson.Field
+	Name               apijson.Field
+	Company            apijson.Field
+	CriteriaAndReasons apijson.Field
+	Domain             apijson.Field
+	Title              apijson.Field
+	raw                string
+	ExtraFields        map[string]apijson.Field
 }
 
 func (r *SearchGetResponse) UnmarshalJSON(data []byte) (err error) {
@@ -142,31 +131,31 @@ func (r searchGetResponseJSON) RawJSON() string {
 	return r.raw
 }
 
-type SearchGetResponseCompany struct {
-	// Returned only for a person.
-	Name string `json:"name,required"`
-	// Returned only for a person.
-	Slug string `json:"slug,required"`
-	// Returned only for a person.
-	Website string                       `json:"website,required"`
-	JSON    searchGetResponseCompanyJSON `json:"-"`
+type SearchGetResponseCriteriaAndReason struct {
+	// Match criteria
+	Criteria string `json:"criteria"`
+	// Whether it's a match
+	Match bool `json:"match"`
+	// Reason for the match
+	Reason string                                 `json:"reason"`
+	JSON   searchGetResponseCriteriaAndReasonJSON `json:"-"`
 }
 
-// searchGetResponseCompanyJSON contains the JSON metadata for the struct
-// [SearchGetResponseCompany]
-type searchGetResponseCompanyJSON struct {
-	Name        apijson.Field
-	Slug        apijson.Field
-	Website     apijson.Field
+// searchGetResponseCriteriaAndReasonJSON contains the JSON metadata for the struct
+// [SearchGetResponseCriteriaAndReason]
+type searchGetResponseCriteriaAndReasonJSON struct {
+	Criteria    apijson.Field
+	Match       apijson.Field
+	Reason      apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
 }
 
-func (r *SearchGetResponseCompany) UnmarshalJSON(data []byte) (err error) {
+func (r *SearchGetResponseCriteriaAndReason) UnmarshalJSON(data []byte) (err error) {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-func (r searchGetResponseCompanyJSON) RawJSON() string {
+func (r searchGetResponseCriteriaAndReasonJSON) RawJSON() string {
 	return r.raw
 }
 
@@ -176,11 +165,43 @@ type SearchNewParams struct {
 	// Search query.
 	Query param.Field[string] `json:"query"`
 	// The mode of the search. Valid values are 'exact' or 'best'.
-	ResultMode param.Field[string] `json:"result_mode"`
-	// The scope of the search. Valid values are 'people' or 'companies'.
-	Scope param.Field[string] `json:"scope"`
+	ResultMode param.Field[SearchNewParamsResultMode] `json:"result_mode"`
+	// The scope of the search. Valid values are 'person' or 'company'.
+	Scope param.Field[SearchNewParamsScope] `json:"scope"`
 }
 
 func (r SearchNewParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
+}
+
+// The mode of the search. Valid values are 'exact' or 'best'.
+type SearchNewParamsResultMode string
+
+const (
+	SearchNewParamsResultModeExact SearchNewParamsResultMode = "exact"
+	SearchNewParamsResultModeBest  SearchNewParamsResultMode = "best"
+)
+
+func (r SearchNewParamsResultMode) IsKnown() bool {
+	switch r {
+	case SearchNewParamsResultModeExact, SearchNewParamsResultModeBest:
+		return true
+	}
+	return false
+}
+
+// The scope of the search. Valid values are 'person' or 'company'.
+type SearchNewParamsScope string
+
+const (
+	SearchNewParamsScopePerson  SearchNewParamsScope = "person"
+	SearchNewParamsScopeCompany SearchNewParamsScope = "company"
+)
+
+func (r SearchNewParamsScope) IsKnown() bool {
+	switch r {
+	case SearchNewParamsScopePerson, SearchNewParamsScopeCompany:
+		return true
+	}
+	return false
 }
