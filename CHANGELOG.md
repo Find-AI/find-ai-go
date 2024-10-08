@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 (2024-10-08)
+
+Full Changelog: [v0.1.0-alpha.3...v1.2.0](https://github.com/Find-AI/find-ai-go/compare/v0.1.0-alpha.3...v1.2.0)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#13](https://github.com/Find-AI/find-ai-go/issues/13)) ([d5c972d](https://github.com/Find-AI/find-ai-go/commit/d5c972def5a0f19e02ca3fe706a79ef622b6856b))
+
 ## 0.1.0-alpha.3 (2024-10-02)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/Find-AI/find-ai-go/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
