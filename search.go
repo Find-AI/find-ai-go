@@ -105,6 +105,8 @@ type SearchGetResponse struct {
 	CriteriaAndReasons []SearchGetResponseCriteriaAndReason `json:"criteria_and_reasons"`
 	// Returned only for a company.
 	Domain string `json:"domain"`
+	// The status of the search result.
+	Status string `json:"status"`
 	// Returned only for a person.
 	Title string                `json:"title"`
 	JSON  searchGetResponseJSON `json:"-"`
@@ -118,6 +120,7 @@ type searchGetResponseJSON struct {
 	Company            apijson.Field
 	CriteriaAndReasons apijson.Field
 	Domain             apijson.Field
+	Status             apijson.Field
 	Title              apijson.Field
 	raw                string
 	ExtraFields        map[string]apijson.Field
