@@ -51,7 +51,7 @@ func main() {
 	client := findai.NewClient(
 		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("FIND_AI_API_KEY")
 	)
-	searchGetResponses, err := client.Searches.Get(context.TODO(), "id")
+	searches, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {
 		panic(err.Error())
 	}
