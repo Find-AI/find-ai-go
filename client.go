@@ -15,10 +15,8 @@ import (
 // interacting with the find-ai API. You should not instantiate this client
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
-	Options           []option.RequestOption
-	CompanyEnrichment *CompanyEnrichmentService
-	PeopleEnrichment  *PeopleEnrichmentService
-	Searches          *SearchService
+	Options  []option.RequestOption
+	Searches *SearchService
 }
 
 // NewClient generates a new client with the default option read from the
@@ -34,8 +32,6 @@ func NewClient(opts ...option.RequestOption) (r *Client) {
 
 	r = &Client{Options: opts}
 
-	r.CompanyEnrichment = NewCompanyEnrichmentService(opts...)
-	r.PeopleEnrichment = NewPeopleEnrichmentService(opts...)
 	r.Searches = NewSearchService(opts...)
 
 	return
