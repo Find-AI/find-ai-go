@@ -42,6 +42,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/Find-AI/find-ai-go"
 	"github.com/Find-AI/find-ai-go/option"
@@ -55,6 +56,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+	fmt.Printf("%+v\n", searches)
 }
 
 ```
@@ -238,6 +240,28 @@ client.Searches.Get(
 	"id",
 	option.WithMaxRetries(5),
 )
+```
+
+### Accessing raw response data (e.g. response headers)
+
+You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
+you need to examine response headers, status codes, or other details.
+
+```go
+// Create a variable to store the HTTP response
+var response *http.Response
+searches, err := client.Searches.Get(
+	context.TODO(),
+	"id",
+	option.WithResponseInto(&response),
+)
+if err != nil {
+	// handle error
+}
+fmt.Printf("%+v\n", searches)
+
+fmt.Printf("Status Code: %d\n", response.StatusCode)
+fmt.Printf("Headers: %+#v\n", response.Header)
 ```
 
 ### Making custom/undocumented requests
