@@ -24,8 +24,9 @@ func TestUsage(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.Searches.Get(context.TODO(), "id")
+	searches, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {
 		t.Error(err)
 	}
+	t.Logf("%+v\n", searches)
 }
