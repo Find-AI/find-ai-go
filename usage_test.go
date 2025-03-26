@@ -27,6 +27,7 @@ func TestUsage(t *testing.T) {
 	searches, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {
 		t.Error(err)
+		return
 	}
 	t.Logf("%+v\n", searches)
 }
