@@ -5,7 +5,7 @@
 The Find AI Go library provides convenient access to [the Find AI REST
 API](https://docs.find-ai.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/Find-AI/find-ai-go@v1.2.0'
+go get -u 'github.com/Find-AI/find-ai-go@v1.3.0'
 ```
 
 <!-- x-release-please-end -->
@@ -42,6 +42,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/Find-AI/find-ai-go"
 	"github.com/Find-AI/find-ai-go/option"
@@ -51,10 +52,11 @@ func main() {
 	client := findai.NewClient(
 		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("FIND_AI_API_KEY")
 	)
-	searchGetResponses, err := client.Searches.Get(context.TODO(), "id")
+	searches, err := client.Searches.Get(context.TODO(), "id")
 	if err != nil {
 		panic(err.Error())
 	}
+	fmt.Printf("%+v\n", searches)
 }
 
 ```
@@ -104,7 +106,7 @@ if res.Name == "" {
 	// true if `"name"` is either not present or explicitly null
 	res.JSON.Name.IsNull()
 
-	// true if the `"name"` key was not present in the repsonse JSON at all
+	// true if the `"name"` key was not present in the response JSON at all
 	res.JSON.Name.IsMissing()
 
 	// When the API returns data that cannot be coerced to the expected type:
@@ -240,6 +242,28 @@ client.Searches.Get(
 )
 ```
 
+### Accessing raw response data (e.g. response headers)
+
+You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
+you need to examine response headers, status codes, or other details.
+
+```go
+// Create a variable to store the HTTP response
+var response *http.Response
+searches, err := client.Searches.Get(
+	context.TODO(),
+	"id",
+	option.WithResponseInto(&response),
+)
+if err != nil {
+	// handle error
+}
+fmt.Printf("%+v\n", searches)
+
+fmt.Printf("Status Code: %d\n", response.StatusCode)
+fmt.Printf("Headers: %+#v\n", response.Header)
+```
+
 ### Making custom/undocumented requests
 
 This library is typed for convenient access to the documented API. If you need to access undocumented
@@ -330,7 +354,7 @@ middleware has been applied.
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
-1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals)_.
+1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
 2. Changes that we do not expect to impact the vast majority of users in practice.
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.

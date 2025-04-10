@@ -15,10 +15,18 @@ import (
 // interacting with the find-ai API. You should not instantiate this client
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
-	Options           []option.RequestOption
-	CompanyEnrichment *CompanyEnrichmentService
-	PeopleEnrichment  *PeopleEnrichmentService
-	Searches          *SearchService
+	Options  []option.RequestOption
+	Searches *SearchService
+}
+
+// DefaultClientOptions read from the environment (FIND_AI_API_KEY). This should be
+// used to initialize new clients.
+func DefaultClientOptions() []option.RequestOption {
+	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
+	if o, ok := os.LookupEnv("FIND_AI_API_KEY"); ok {
+		defaults = append(defaults, option.WithAPIKey(o))
+	}
+	return defaults
 }
 
 // NewClient generates a new client with the default option read from the
@@ -26,16 +34,10 @@ type Client struct {
 // after these default arguments, and all option will be passed down to the
 // services and requests that this client makes.
 func NewClient(opts ...option.RequestOption) (r *Client) {
-	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
-	if o, ok := os.LookupEnv("FIND_AI_API_KEY"); ok {
-		defaults = append(defaults, option.WithAPIKey(o))
-	}
-	opts = append(defaults, opts...)
+	opts = append(DefaultClientOptions(), opts...)
 
 	r = &Client{Options: opts}
 
-	r.CompanyEnrichment = NewCompanyEnrichmentService(opts...)
-	r.PeopleEnrichment = NewPeopleEnrichmentService(opts...)
 	r.Searches = NewSearchService(opts...)
 
 	return
