@@ -2,8 +2,8 @@
 
 <a href="https://pkg.go.dev/github.com/Find-AI/find-ai-go"><img src="https://pkg.go.dev/badge/github.com/Find-AI/find-ai-go.svg" alt="Go Reference"></a>
 
-The Find AI Go library provides convenient access to [the Find AI REST
-API](https://usefind.ai/api/docs/) from applications written in Go. The full API of this library can be found in [api.md](api.md).
+The Find AI Go library provides convenient access to the [Find AI REST API](https://usefind.ai/api/docs/)
+from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
