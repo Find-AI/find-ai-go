@@ -31,7 +31,7 @@ go get -u 'github.com/Find-AI/find-ai-go@v1.2.0'
 
 ## Requirements
 
-This library requires Go 1.18+.
+This library requires Go 1.22+.
 
 ## Usage
 
