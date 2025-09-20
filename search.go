@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"slices"
 
 	"github.com/Find-AI/find-ai-go/internal/apijson"
 	"github.com/Find-AI/find-ai-go/internal/param"
@@ -35,7 +36,7 @@ func NewSearchService(opts ...option.RequestOption) (r *SearchService) {
 
 // Starts a search.
 func (r *SearchService) New(ctx context.Context, body SearchNewParams, opts ...option.RequestOption) (res *SearchNewResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/searches"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
@@ -43,7 +44,7 @@ func (r *SearchService) New(ctx context.Context, body SearchNewParams, opts ...o
 
 // The endpoint to poll to check the latest results of a search.
 func (r *SearchService) Get(ctx context.Context, id string, opts ...option.RequestOption) (res *[]SearchGetResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	if id == "" {
 		err = errors.New("missing required id parameter")
 		return
