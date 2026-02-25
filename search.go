@@ -55,7 +55,7 @@ func (r *SearchService) Get(ctx context.Context, id string, opts ...option.Reque
 }
 
 type SearchNewResponse struct {
-	Poll SearchNewResponsePoll `json:"poll,required"`
+	Poll SearchNewResponsePoll `json:"poll" api:"required"`
 	JSON searchNewResponseJSON `json:"-"`
 }
 
@@ -76,8 +76,8 @@ func (r searchNewResponseJSON) RawJSON() string {
 }
 
 type SearchNewResponsePoll struct {
-	Token string                    `json:"token,required"`
-	Path  string                    `json:"path,required"`
+	Token string                    `json:"token" api:"required"`
+	Path  string                    `json:"path" api:"required"`
 	JSON  searchNewResponsePollJSON `json:"-"`
 }
 
@@ -99,8 +99,8 @@ func (r searchNewResponsePollJSON) RawJSON() string {
 }
 
 type SearchGetResponse struct {
-	LinkedinURL string `json:"linkedin_url,required"`
-	Name        string `json:"name,required"`
+	LinkedinURL string `json:"linkedin_url" api:"required"`
+	Name        string `json:"name" api:"required"`
 	// Returned only for a person.
 	Company            string                               `json:"company"`
 	CriteriaAndReasons []SearchGetResponseCriteriaAndReason `json:"criteria_and_reasons"`
