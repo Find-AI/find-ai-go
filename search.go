@@ -39,7 +39,7 @@ func (r *SearchService) New(ctx context.Context, body SearchNewParams, opts ...o
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/searches"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // The endpoint to poll to check the latest results of a search.
@@ -47,11 +47,11 @@ func (r *SearchService) Get(ctx context.Context, id string, opts ...option.Reque
 	opts = slices.Concat(r.Options, opts)
 	if id == "" {
 		err = errors.New("missing required id parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("v1/searches/%s", id)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 type SearchNewResponse struct {
