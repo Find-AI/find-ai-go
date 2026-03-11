@@ -38,7 +38,7 @@ func TestUserAgentHeader(t *testing.T) {
 			},
 		}),
 	)
-	client.Searches.Get(context.Background(), "id")
+	_, _ = client.Searches.Get(context.Background(), "id")
 	if userAgent != fmt.Sprintf("FindAI/Go %s", internal.PackageVersion) {
 		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
 	}
